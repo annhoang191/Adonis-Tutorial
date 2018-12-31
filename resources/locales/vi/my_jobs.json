@@ -1,0 +1,14 @@
+{
+  "title": "Các công việc của tôi",
+  "post_a_job": "Đăng tải một việc làm",
+  "job_title": "Tiêu đề",
+  "link": "Đường dẫn",
+  "description": "Mô tả",
+  "submit": "Đăng tải",
+  "jobs_posted": "Các công việc đã đăng",
+  "delete": "Xóa",
+  "edit": "Sửa",
+  "edit_page_title": "Chỉnh sửa công việc",
+  "edit_job": "Sửa công việc {title}",
+  "update_job": "Cập nhật công việc"
+}

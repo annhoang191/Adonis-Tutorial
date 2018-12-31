@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{ style('style') }}
+    @!section('extracss')
+    <title>
+      @!section('title')
+    </title>
+</head>
+<body>
+  <header>
+    <a href="/" id="logo">{{ antl.formatMessage('main.home') }}</a>
+    <nav>
+      <ul>
+        <li><a href="/">{{ antl.formatMessage('main.jobs') }}</a></li>
+        @loggedIn
+          <li><a href="/post-a-job">{{ antl.formatMessage('main.my_jobs') }}</a></li>
+          <li><a href="/logout">{{ antl.formatMessage('main.logout') }}</a></li>
+        @else
+          <li><a href="/login">{{ antl.formatMessage('main.login') }}</a></li>
+          <li><a href="/signup">{{ antl.formatMessage('main.signup') }}</a></li>
+        @endloggedIn
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    @!section('content')
+  </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+@layout('layouts.main')
+@section('extracss')
+  {{ style('forms') }}
+@endsection
+@section('title')
+  {{ antl.formatMessage('auth.login_page') }}
+@endsection
+
+@section('content')
+  <h1>{{ antl.formatMessage('auth.login_page') }}</h1>
+  <div class="job-container">
+    @if(flashMessage('loginError'))
+      <span>{{ flashMessage('loginError') }}</span>
+    @endif
+
+    <form method="POST" action="{{ route('UserController.login') }}">
+      {{ csrfField() }}
+
+      <label for="email">{{ antl.formatMessage('auth.email') }}</label>
+      <input type="email" name="email" value="{{ old('email', '') }}">
+      @if(hasErrorFor('email'))
+        <span>{{ getErrorFor('email') }}</span>
+      @endif
+      <label for="password">{{ antl.formatMessage('auth.password') }}</label>
+      <input type="password" name="password" >
+      @if(hasErrorFor('password'))
+        <span>{{ getErrorFor('password') }}</span>
+      @endif
+      <button type="submit">{{ antl.formatMessage('auth.login_submit') }}</button>
+    </form>
+  </div>
+@endsection

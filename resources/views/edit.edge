@@ -1,0 +1,36 @@
+@layout('layouts.main')
+@section('title')
+  {{ antl.formatMessage('my_jobs.edit_page_title') }}
+@endsection
+
+@section('extracss')
+  {{ style('forms') }}
+@endsection
+
+@section('content')
+  <h1>{{ antl.formatMessage('my_jobs.edit_job', { title: job.title }) }}</h1>
+  <div class="job-container">
+    @if(flashMessage('message'))
+      <span>{{ flashMessage('message') }}</span>
+    @endif
+    <form action="{{ route('JobController.update', { id: job.id }) }}" method="POST">
+      {{ csrfField() }}
+      <label for="title">{{ antl.formatMessage('my_jobs.job_title') }}</label>
+      <input type="text" name="title" value="{{ job.title }}">
+      @if(hasErrorFor('title'))
+        <span>{{ getErrorFor('title') }}</span>
+      @endif
+      <label for="link">{{ antl.formatMessage('my_jobs.link') }}</label>
+      <input type="text" name="link" value="{{ job.link }}">
+      @if(hasErrorFor('link'))
+        <span>{{ getErrorFor('link') }}</span>
+      @endif
+      <label for="description">{{ antl.formatMessage('my_jobs.description') }}</label>
+      <input type="text" name="description" value="{{ job.description }}">
+      @if(hasErrorFor('description'))
+        <span>{{ getErrorFor('description') }}</span>
+      @endif
+      <button type="submit">{{ antl.formatMessage('my_jobs.update_job') }}</button><br>
+    </form>
+  </div>
+@endsection

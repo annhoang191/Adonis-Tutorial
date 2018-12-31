@@ -1,0 +1,55 @@
+@layout('layouts.main')
+@section('title')
+  {{ antl.formatMessage('my_jobs.title') }}
+@endsection
+@section('extracss')
+  {{ style('forms') }}
+@endsection
+
+@section('content')
+  <h1>{{ antl.formatMessage('my_jobs.post_a_job') }}</h1>
+  <div class="job-container">
+    @if(flashMessage('message'))
+      <span>{{ flashMessage('message') }}</span>
+    @endif
+    <form method="POST" action="{{ route('JobController.create') }}">
+      {{ csrfField() }}
+      <label for="title">{{ antl.formatMessage('my_jobs.job_title') }}</label>
+      <input type="text" name="title" value="{{ old('title', '') }}">
+      @if(hasErrorFor('title'))
+        <span>{{ getErrorFor('title') }}</span>
+      @endif
+      <label for="link">{{ antl.formatMessage('my_jobs.link') }}</label>
+      <input type="text" name="link" value="{{ old('link', '') }}">
+      @if(hasErrorFor('link'))
+        <span>{{ getErrorFor('link') }}</span>
+      @endif
+      <label for="description">{{ antl.formatMessage('my_jobs.description') }}</label>
+      <input type="text" name="description">
+      @if(hasErrorFor('description'))
+        <span>{{ getErrorFor('description') }}</span>
+      @endif
+      <button type="submit">{{ antl.formatMessage('my_jobs.submit') }}</button>
+    </form>
+  </div>
+
+  <h2>{{ antl.formatMessage('my_jobs.jobs_posted') }}</h2>
+
+  @each(job in jobs)
+    <div class="job-container2">
+      <div class="blank"></div>
+      <div class="job-info">
+        <h3><a href="{{ job.link }}">{{ job.title }}</a></h3>
+        <p>{{ job.description }}</p>
+        <ul>
+          <li><a href="{{ route('JobController.delete', { id: job.id }) }}">
+            {{ antl.formatMessage('my_jobs.delete') }}
+          </a></li>
+          <li><a href="{{ route('JobController.edit', { id: job.id }) }}">
+            {{ antl.formatMessage('my_jobs.edit') }}
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  @endeach
+@endsection
